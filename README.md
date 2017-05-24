@@ -269,7 +269,7 @@ Knowing how the plugin works in the back might a good idea if you plan to contri
 6. [ISerializer](LoveOAS/Interfaces/ISerializer.cs) serializes nodes into an object with payload and links. For instance the default implmentation [JsonOutputSerializer](LoveOAS/Discovery/JsonOutputSerializer.cs) serializes to JSON.
 7. [IOrchestrator](LoveOAS/Interfaces/IOrchestrator.cs) uses all the other interfaces to make the process work from reflection to serialization. 
 
-online code documentation
+## Code Documentation
 
 ## Future Work
 

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Dynamite.LoveOAS</id>
+    <version>1.0.0</version>
+    <title>Dynamite.LoveOAS</title>
+    <authors>Maurice Kenmeue Fonwe</authors>
+    <owners>Maurice kenmeue Fonwe</owners>
+    <licenseUrl>https://github.com/kfmaurice/LoveOAS/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/kfmaurice/LoveOAS.git</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/kfmaurice/LoveOAS/master/Images/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library to bring you close to HATEOAS without hating it :-)</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2017 dynamite</copyright>
+    <tags>loveoas hateoas rest</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="10.0.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Dynamite.LoveOAS.dll" target="lib\net4.6\Dynamite.LoveOAS.dll" />
+  </files>
+</package>

@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <Authors>Maurice Kenmeue Fonwe</Authors>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>Dynamite.LoveOAS.NetCore</AssemblyName>
+    <PackageId>Dynamite.LoveOAS.NetCore</PackageId>
+    <Description>A library to bring you close to HATEOAS without hating it :-)</Description>
+    <PackageTags>loveoas;hateoas;rest;core</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/kfmaurice/LoveOAS/master/Images/logo.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/kfmaurice/LoveOAS.git</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/kfmaurice/LoveOAS/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/kfmaurice/LoveOAS.git</RepositoryUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dynamite.LoveOAS\Dynamite.LoveOAS.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+  </ItemGroup>
+  
+  <Target Name="PostcompileScript" AfterTargets="Build">
+    <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
+  </Target>
+  
+</Project>

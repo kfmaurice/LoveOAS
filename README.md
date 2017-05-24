@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/uvgd2f4kd429fi92/branch/master?svg=true)](https://ci.appveyor.com/project/kfmaurice/loveoas/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/3x3mydoni0j12tsr/branch/master?svg=true)](https://ci.appveyor.com/project/kfmaurice/loveoas/branch/master)
 # LoveOAS
 A library to bring you closer to HATEOAS without hating it :-)
 

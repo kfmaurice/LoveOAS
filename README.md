@@ -3,7 +3,7 @@
 A library to bring you closer to HATEOAS without hating it :-)
 
 ## Abstract
-Implementing HATEOAS for a web application almost boils down to the fact that contextual links are embedded in server responses to allow clients to navigate throughout the application. Most of the time, these links are included per entity. So, if the response of a REST endpoint is an array of object then each object contains hypermedia links for acting on the object.
+Implementing HATEOAS for a web application mostly boils down to the fact that contextual links are embedded in server responses to allow clients to navigate throughout the application. Most of the time, these links are included per entity. So, if the response of a REST endpoint is an array of object then each object contains hypermedia links for acting on the object.
 
 ```c#
 {

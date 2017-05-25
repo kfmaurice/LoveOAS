@@ -262,7 +262,7 @@ You can sneak into the code to discover further usage of the attributes presente
 ## Implementation Details
 Knowing how the plugin works in the back might a good idea if you plan to contribute or need to fit it to your usage. All you need to know about is the interfaces which have been defined for it and how they connect to each others. Basically, they play all together to construct a graph of interconnected endpoints so that building links for each request results in looking up the graph and performing some serialization. 7 interfaces intervene sequentially in the graph construction:
 1. [IExtractor](Dynamite.LoveOAS/Interfaces/IExtractor.cs) defines methods to extract specific attributes from controller actions. Reflection is expected to be used.
-2. [IDiscoverer](Dynamite.LoveOAS/Interfaces/IDiscoverer.cs) is used to convert controller actions to interconnected [endpoints](Dynamite.LoveOAS/Discovery/Endpoint.cs) in order to build a network.
+2. [IDiscoverer](Dynamite.LoveOAS/Interfaces/IDiscoverer.cs) is used to convert controller actions to interconnected [endpoints](Dynamite.LoveOAS/Model/Endpoint.cs) in order to build a network.
 3. [IParser](Dynamite.LoveOAS/Interfaces/IParser.cs) converts endpoints to [nodes](Dynamite.LoveOAS/Model/Node.cs) ready to be serialized as a matter of links.
    * [IAuthorization](Dynamite.LoveOAS/Interfaces/IAuthorization.cs) is used by IParser to discover whether a link should be published given the authorization settings.
    * [IRouteSelector](Dynamite.LoveOAS/Interfaces/IRouteSelector.cs) is also used by IParser to uniquely select a route on endpoints with multiple routes.

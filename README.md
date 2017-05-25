@@ -1,9 +1,9 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/uvgd2f4kd429fi92/branch/master?svg=true)](https://ci.appveyor.com/project/kfmaurice/loveoas/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/3x3mydoni0j12tsr/branch/master?svg=true)](https://ci.appveyor.com/project/kfmaurice/loveoas/branch/master)
 # LoveOAS
 A library to bring you closer to HATEOAS without hating it :-)
 
 ## Abstract
-Implementing HATEOAS for a web application almost boils down to the fact that contextual links are embedded in server responses to allow clients to navigate throughout the application. Most of the time, these links are included per entity. So, if the response of a REST endpoint is an array of object then each object contains hypermedia links for acting on the object.
+Implementing HATEOAS for a web application mostly boils down to the fact that contextual links are embedded in server responses to allow clients to navigate throughout the application. Most of the time, these links are included per entity. So, if the response of a REST endpoint is an array of object then each object contains hypermedia links for acting on the object.
 
 ```c#
 {
@@ -248,11 +248,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-The primary use of the settings is to configure how the graph is constructed. See [ISettings.cs](LoveOAS/Interfaces/ISettings.cs) for all the properties to care about to tweak the endpoint discovery. Concerning the ``Mode`` property, only ``Boot`` is currently supported
+The primary use of the settings is to configure how the graph is constructed. See [ISettings.cs](Dynamite.LoveOAS/Interfaces/ISettings.cs) for all the properties to care about to tweak the endpoint discovery. Concerning the ``Mode`` property, only ``Boot`` is currently supported
  and means that the graph is built once when the application starts and never changed on runtime.
  
 ### Authorization
-There might the case that you do not wish to publish links for which the user is not authorized. Normally, with Web Api 2 you would use the ``Authorize`` attribute to require authorization on such links. So, for the plugin to detect that authorization is required on a link, you have to use either ``ExtendedAuthorizeAttribute``. This attribute inherits from ``System.Web.Http.AuthorizeAttribute``. In addition, it only has a method which provide the authorization value of the endpoint. See for yourself in [ExtendedAuthorizeAttribute.cs](LoveOAS/Attributes/ExtendedAuthorizeAttribute.cs). 
+There might the case that you do not wish to publish links for which the user is not authorized. Normally, with Web Api 2 you would use the ``Authorize`` attribute to require authorization on such links. So, for the plugin to detect that authorization is required on a link, you have to use either ``ExtendedAuthorizeAttribute``. This attribute inherits from ``System.Web.Http.AuthorizeAttribute``. In addition, it only has a method which provide the authorization value of the endpoint. See for yourself in [ExtendedAuthorizeAttribute.cs](Dynamite.LoveOAS/Attributes/ExtendedAuthorizeAttribute.cs). 
 
 Authorization for ASP.NET Core is not quite handled by the plugin yet since authorization has been rewritten by the ASP.NET Core team.
 
@@ -261,15 +261,15 @@ You can sneak into the code to discover further usage of the attributes presente
 
 ## Implementation Details
 Knowing how the plugin works in the back might a good idea if you plan to contribute or need to fit it to your usage. All you need to know about is the interfaces which have been defined for it and how they connect to each others. Basically, they play all together to construct a graph of interconnected endpoints so that building links for each request results in looking up the graph and performing some serialization. 7 interfaces intervene sequentially in the graph construction:
-1. [IExtractor](LoveOAS/Interfaces/IExtractor.cs) defines methods to extract specific attributes from controller actions. Reflection is expected to be used.
-2. [IDiscoverer](LoveOAS/Interfaces/IDiscoverer.cs) is used to convert controller actions to interconnected [endpoints](LoveOAS/Discovery/Endpoint.cs) in order to build a network.
-3. [IParser](LoveOAS/Interfaces/IParser.cs) converts endpoints to [nodes](LoveOAS/Discovery/Node.cs) ready to be serialized as a matter of links.
-   * [IAuthorization](LoveOAS/Interfaces/IAuthorization.cs) is used by IParser to discover whether a link should be published given the authorization settings.
-   * [IRouteSelector](LoveOAS/Interfaces/IRouteSelector.cs) is also used by IParser to uniquely select a route on endpoints with multiple routes.
-6. [ISerializer](LoveOAS/Interfaces/ISerializer.cs) serializes nodes into an object with payload and links. For instance the default implmentation [JsonOutputSerializer](LoveOAS/Discovery/JsonOutputSerializer.cs) serializes to JSON.
-7. [IOrchestrator](LoveOAS/Interfaces/IOrchestrator.cs) uses all the other interfaces to make the process work from reflection to serialization. 
+1. [IExtractor](Dynamite.LoveOAS/Interfaces/IExtractor.cs) defines methods to extract specific attributes from controller actions. Reflection is expected to be used.
+2. [IDiscoverer](Dynamite.LoveOAS/Interfaces/IDiscoverer.cs) is used to convert controller actions to interconnected [endpoints](Dynamite.LoveOAS/Model/Endpoint.cs) in order to build a network.
+3. [IParser](Dynamite.LoveOAS/Interfaces/IParser.cs) converts endpoints to [nodes](Dynamite.LoveOAS/Model/Node.cs) ready to be serialized as a matter of links.
+   * [IAuthorization](Dynamite.LoveOAS/Interfaces/IAuthorization.cs) is used by IParser to discover whether a link should be published given the authorization settings.
+   * [IRouteSelector](Dynamite.LoveOAS/Interfaces/IRouteSelector.cs) is also used by IParser to uniquely select a route on endpoints with multiple routes.
+6. [ISerializer](Dynamite.LoveOAS/Interfaces/ISerializer.cs) serializes nodes into an object with payload and links. For instance the default implmentation [JsonOutputSerializer](Dynamite.LoveOAS/Discovery/JsonOutputSerializer.cs) serializes to JSON.
+7. [IOrchestrator](Dynamite.LoveOAS/Interfaces/IOrchestrator.cs) uses all the other interfaces to make the process work from reflection to serialization. 
 
-online code documentation
+## Code Documentation
 
 ## Future Work
 

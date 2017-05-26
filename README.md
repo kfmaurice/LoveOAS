@@ -269,10 +269,15 @@ Knowing how the plugin works in the back might a good idea if you plan to contri
 6. [ISerializer](Dynamite.LoveOAS/Interfaces/ISerializer.cs) serializes nodes into an object with payload and links. For instance the default implmentation [JsonOutputSerializer](Dynamite.LoveOAS/Discovery/JsonOutputSerializer.cs) serializes to JSON.
 7. [IOrchestrator](Dynamite.LoveOAS/Interfaces/IOrchestrator.cs) uses all the other interfaces to make the process work from reflection to serialization. 
 
+Note that ``IAuthorization`` and ``IRouteSelector`` are set on each request that reaches the filter since they depend on values of the context. Take a look at the method ``SetDefault`` in the filter for the details. This method can be overriden to implement another behavior.
+
 ## Code Documentation
 
 ## Future Work
-
+Here are some features that I'll be developing in the near future (I hope). Feel free to help :-)
+1. Return link with value i.e. "http://url.com/api/people/1" instead of "http://url.com/api/people/{id}". This should be configurable through settings to make the two options possible.
+2. Publish the "Self" link automatically and make it configurable too.
+3. 
 ## License
 
 Licensed under MIT.

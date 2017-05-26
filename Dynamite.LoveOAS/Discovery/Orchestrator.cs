@@ -121,15 +121,5 @@ namespace Dynamite.LoveOAS.Discovery
       Parser = parser ?? new Parser(Authorization, RouteSelector);
       Serializer = serializer ?? new JsonOutputSerializer(Settings);
     }
-
-    ///// <summary>
-    ///// Merge current settings with settings submitted during setup
-    ///// </summary>
-    ///// <param name="settings"></param>
-    //private void MergeSettings(ISettings settings)
-    //{
-    //  Settings.CheckAuthorization = settings.CheckAuthorization;
-    //  Settings.Mode = settings.Mode;
-    //}
   }
 }

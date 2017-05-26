@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using System.Net.Http.Formatting;
-using System.Collections.Generic;
 
-using Dynamite.LoveOAS.Discovery;
 using Dynamite.LoveOAS.Model;
+using Dynamite.LoveOAS.Discovery;
 
 namespace Dynamite.LoveOAS.Filters
 {
@@ -31,6 +31,7 @@ namespace Dynamite.LoveOAS.Filters
     public async Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
     {
       HttpActionExecutedContext executedContext;
+
       var response = await continuation();
 
       try
@@ -51,8 +52,7 @@ namespace Dynamite.LoveOAS.Filters
           {
             processor.Settings.AbsoluteBaseUrl = GetAbsoluteUrl(actionContext.Request.RequestUri, actionContext.RequestContext.VirtualPathRoot); ;
           }
-          SetDefaults(processor.Authorization = new Authorization(processor.Settings, actionContext), 
-            new RouteSelector(actionContext.RequestContext.Configuration.Routes.Skip(1).ToList().Select(x => x.RouteTemplate)));
+          SetDefaults(actionContext);
 
           if (info != null)
           {
@@ -84,6 +84,33 @@ namespace Dynamite.LoveOAS.Filters
       }
 
       return executedContext.Response;
+    }
+
+    /// <summary>
+    /// Set default instances for authorization and route selection.
+    /// This will be called each the times the LoveOAS filters runs.
+    /// It is used to initialize objects that might depend on properties of the filter.
+    /// </summary>
+    /// <param name="actionContext">Filter action context</param>
+    public virtual void SetDefaults(HttpActionContext actionContext)
+    {
+      // authorization
+      if (processor.Authorization == null || typeof(Authorization) == processor.Authorization.GetType())
+      {
+        processor.Authorization = new Authorization(processor.Settings, actionContext);
+      }
+
+      // route selector
+      if (processor.RouteSelector == null || typeof(RouteSelector) == processor.RouteSelector.GetType())
+      {
+        processor.RouteSelector = new RouteSelector(actionContext.RequestContext.Configuration.Routes.Skip(1).ToList().Select(x => x.RouteTemplate));
+      }
+
+      // parser
+      if (processor.Parser == null || typeof(Parser) == processor.Parser.GetType())
+      {
+        processor.Parser = new Parser(processor.Authorization, processor.RouteSelector);
+      }
     }
     #endregion
   }

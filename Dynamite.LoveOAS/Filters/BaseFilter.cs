@@ -2,14 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
-using Dynamite.LoveOAS.Discovery;
 using Dynamite.LoveOAS.Model;
 
 namespace Dynamite.LoveOAS.Filters
 {
   /// <summary>
-  /// Base class for the MVC and Web Api Filters
+  /// Base class for the LoveOAS* filters
   /// </summary>
   public class BaseFilter
   {
@@ -74,32 +72,6 @@ namespace Dynamite.LoveOAS.Filters
       else
       {
         return true;
-      }
-    }
-
-    /// <summary>
-    /// Set default instances for authorization and route selection
-    /// </summary>
-    /// <param name="authorization">Default authorization</param>
-    /// <param name="routeSelector">Default route selector</param>
-    public virtual void SetDefaults(IAuthorization authorization, IRouteSelector routeSelector)
-    {
-      // authorization
-      if (processor.Authorization == null || typeof(Authorization) == processor.Authorization.GetType())
-      {
-        processor.Authorization = authorization;
-      }
-
-      // route selector
-      if (processor.RouteSelector == null || typeof(RouteSelector) == processor.RouteSelector.GetType())
-      {
-        processor.RouteSelector = routeSelector;
-      }
-
-      // parser
-      if (processor.Parser == null || typeof(Parser) == processor.Parser.GetType())
-      {
-        processor.Parser = new Parser(processor.Authorization, processor.RouteSelector);
       }
     }
   }

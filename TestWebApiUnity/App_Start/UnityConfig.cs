@@ -2,8 +2,8 @@ using System;
 using Microsoft.Practices.Unity;
 
 using Dynamite.LoveOAS;
-using Dynamite.LoveOAS.Model;
 using Dynamite.LoveOAS.Discovery;
+using Dynamite.LoveOAS.Filters;
 
 namespace TestWebApiUnity.App_Start
 {

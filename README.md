@@ -271,13 +271,19 @@ Knowing how the plugin works in the back might a good idea if you plan to contri
 
 Note that ``IAuthorization`` and ``IRouteSelector`` are set on each request that reaches the filter since they depend on values of the context. Take a look at the method ``SetDefault`` in the filter for the details. This method can be overriden to implement another behavior.
 
-## Code Documentation
+## API Documentation
+See [this link](http://todo)
 
 ## Future Work
 Here are some features that I'll be developing in the near future (I hope). Feel free to help :-)
-1. Return link with value i.e. "http://url.com/api/people/1" instead of "http://url.com/api/people/{id}". This should be configurable through settings to make the two options possible.
+1. Return link with value i.e. ``http://url.com/api/people/1``instead of ``http://url.com/api/people/{id}``. This should be configurable through settings to make the two options possible.
 2. Publish the "Self" link automatically and make it configurable too.
-3. 
+3. Node intelligence:
+   * Entities mostly allow CRUD operations
+   * Therefore, an API endpoint might be considered as an operator to an entity
+   
+   These facts might imply that endpoint discovery shouldn't be centered on method reflection but rather on operator definition. So an endpoint is published when it defines itself as an operator to an entity (lying aside :-)) and its prerequisites are met (authorization, ...). 
+   
 ## License
 
 Licensed under MIT.

@@ -271,8 +271,6 @@ Knowing how the plugin works in the back might a good idea if you plan to contri
 
 Note that ``IAuthorization`` and ``IRouteSelector`` are set on each request that reaches the filter since they depend on values of the context. Take a look at the method ``SetDefault`` in the filter for the details. This method can be overriden to implement another behavior.
 
-## API Documentation
-See [this link](http://todo)
 
 ## Future Work
 Here are some features that I'll be developing in the near future (I hope). Feel free to help :-)

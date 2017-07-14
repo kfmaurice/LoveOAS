@@ -203,7 +203,7 @@ public static class WebApiConfig
 ```
 We'll get to the settings later in the next chapter.
 
-If your project is an ASP.NET Core Web Application targeting the fll .NET Framework then you should rather register the filter in the startup class ``Startup.cs``:
+If your project is an ASP.NET Core Web Application targeting the full .NET Framework then you should rather register the filter in the startup class ``Startup.cs``:
 ```c#
 using LoveOAS.NetCore.Filters;
 ...
@@ -220,7 +220,7 @@ public void ConfigureServices(IServiceCollection services)
 Note that the namespace for the filters is now ``LoveOAS.NetCore.Filters``.
 
 ### Setup And Settings
-Before the filters are able to extend controller actions marked with the attributes presented above, you need to boot the plugin. During theis step a graph of endpoints will be constructed and cached so that each request do not need to do it again. With ASP.NET MVC and Web APi 2, you might call the following code in ``WebApiConfig``:
+Before the filters are able to extend controller actions marked with the attributes presented above, you need to boot the plugin. During this step a graph of endpoints will be constructed and cached so that each request do not need to do it again. With Web APi 2, you might call the following code in ``WebApiConfig``:
 ```c#
 public static class WebApiConfig
 {
@@ -252,7 +252,7 @@ The primary use of the settings is to configure how the graph is constructed. Se
  and means that the graph is built once when the application starts and never changed on runtime.
  
 ### Authorization
-There might the case that you do not wish to publish links for which the user is not authorized. Normally, with Web Api 2 you would use the ``Authorize`` attribute to require authorization on such links. So, for the plugin to detect that authorization is required on a link, you have to use either ``ExtendedAuthorizeAttribute``. This attribute inherits from ``System.Web.Http.AuthorizeAttribute``. In addition, it only has a method which provide the authorization value of the endpoint. See for yourself in [ExtendedAuthorizeAttribute.cs](Dynamite.LoveOAS/Attributes/ExtendedAuthorizeAttribute.cs). 
+There might the case that you do not wish to publish links for which the user is not authorized. Normally, with Web Api 2 you would use the ``Authorize`` attribute to require authorization on such links. So, for the plugin to detect that authorization is required on a link, you have to use ``ExtendedAuthorizeAttribute``. This attribute inherits from ``System.Web.Http.AuthorizeAttribute``. In addition, it only has a method which provide the authorization value of the endpoint. See for yourself in [ExtendedAuthorizeAttribute.cs](Dynamite.LoveOAS/Attributes/ExtendedAuthorizeAttribute.cs). 
 
 Authorization for ASP.NET Core is not quite handled by the plugin yet since authorization has been rewritten by the ASP.NET Core team.
 

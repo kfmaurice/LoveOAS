@@ -56,13 +56,13 @@ First things first, this plugin targets .NET 4.6.1+ and has been developed for W
 ## How To Use
 The plugin usage is based on attributes applied to controller actions, filters which act on these attributes and a bit of setup to boot up the plugin so you need to do the 3 following steps in the order you wish:
 
-1. Use attributes on action which shold be extended to return an object with the ``payload`` and ``links`` properties.
+1. Use attributes on action which should be extended to return an object with the ``payload`` and ``links`` properties.
 2. Register a filter or filters which will actually modify the response of actions marked with the attributes explained later.
-3. Boot the plugin to allow the graph to be build once when the application starts.
+3. Boot the plugin to allow a graph of links to be build once when the application starts.
 
 
 ### Attributes
-The plugin relies on the fact that all your REST endpoints could be connected between each other into a structure similar to a graph. No doubt, there might be isolated endpoints but they are part of the structure anyway. So when you make a request to a specific endpoint, the plugin makes a lookup in the graph to find all the possible exits and write these in the ``links`` property of the result. Therefoe, to help build the graph, you should be aware of three attributes:
+The plugin relies on the fact that all your REST endpoints could be connected between each other into a structure similar to a graph. No doubt, there might be isolated endpoints but they are part of the structure anyway. So when you make a request to a specific endpoint, the plugin makes a lookup in the graph to find all the possible exits and write these in the ``links`` property of the result. Therefore, to help build the graph, you should be aware of three attributes:
 - Entry
 ```c#
 [Entry("All People")]
@@ -86,7 +86,7 @@ With this attribute you mark the endpoint to be part of the graph. Additionally 
 
 - Base
 
-Having all the entry points, it only makes sense to have one controller action return all these as an object. With the ``Base`` attribute, you can mark an endpoint to be part of the graph and to return all entry points in the ``links`` property. Nothing prevents you from adding an object of your own through the ``payload`` property of the result;
+Having all the entry points, it also makes sense to have one controller action return all these as an object. With the ``Base`` attribute, you can mark an endpoint to be part of the graph and to return all entry points in the ``links`` property. Nothing prevents you from adding an object of your own through the ``payload`` property of the result;
 
 ```c#
 [Base]
@@ -116,7 +116,7 @@ A call to the endpoint above results in the following json response.
 
 - Exit
 
-With the entries in place, you need a way to let api users discover where they can navigate to. With the ``Exit`` attributes, you mark an endpoint to be part of the graph and specify an exit of the endpoint at the same time which results in an entry in the ``links`` property. Endpoints marked as ``Entry`` might be (and maybe) should also specify exits.
+With the entries in place, you need a way to let api users discover where they can navigate to. With the ``Exit`` attributes, you mark an endpoint to be part of the graph and specify an exit of the endpoint at the same time which results in an entry in the ``links`` property. Endpoints marked as ``Entry`` might (and maybe should) also specify exits.
 
 ```c#
 [Entry("All People")]
@@ -266,7 +266,7 @@ Knowing how the plugin works in the back might a good idea if you plan to contri
 3. [IParser](Dynamite.LoveOAS/Interfaces/IParser.cs) converts endpoints to [nodes](Dynamite.LoveOAS/Model/Node.cs) ready to be serialized as a matter of links.
    * [IAuthorization](Dynamite.LoveOAS/Interfaces/IAuthorization.cs) is used by IParser to discover whether a link should be published given the authorization settings.
    * [IRouteSelector](Dynamite.LoveOAS/Interfaces/IRouteSelector.cs) is also used by IParser to uniquely select a route on endpoints with multiple routes.
-6. [ISerializer](Dynamite.LoveOAS/Interfaces/ISerializer.cs) serializes nodes into an object with payload and links. For instance the default implmentation [JsonOutputSerializer](Dynamite.LoveOAS/Discovery/JsonOutputSerializer.cs) serializes to JSON.
+6. [ISerializer](Dynamite.LoveOAS/Interfaces/ISerializer.cs) serializes nodes into an object with payload and links. For instance, the default implmentation [JsonOutputSerializer](Dynamite.LoveOAS/Discovery/JsonOutputSerializer.cs) serializes to JSON.
 7. [IOrchestrator](Dynamite.LoveOAS/Interfaces/IOrchestrator.cs) uses all the other interfaces to make the process work from reflection to serialization. 
 
 Note that ``IAuthorization`` and ``IRouteSelector`` are set on each request that reaches the filter since they depend on values of the context. Take a look at the method ``SetDefault`` in the filter for the details. This method can be overriden to implement another behavior.

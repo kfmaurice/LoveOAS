@@ -51,7 +51,7 @@ The idea behind LoveOAS is to implement something similar to HATEOAS... with a s
 In other terms, the idea is to extend responses with links without having to tweak on entities. With this, adding the HATEOAS constraint on an existing REST API should (hopefully) feel like a piece of cake.
 
 ## Installation
-First things first, this plugin targets .NET 4.6.1+ and has been developed for Web APi 2 and .NET Core (only full .NET Framework is supported at the moment). Web application built with ASP.NET MVC and Web Api 2 require the nuget package ``Dynamite.LoveOAS``. For .NET Core the package ``Dynamite.LoveOAS.NETCore`` is additionally required.
+First things first, this plugin targets .NET 4.6.1+ and has been developed for Web APi 2 and .NET Core (only full .NET Framework is supported at the moment). Web applications built with Web Api 2 require the nuget package ``Dynamite.LoveOAS``. Those built with .NET Core require the package ``Dynamite.LoveOAS.NETCore`` additionally.
 
 ## How To Use
 The plugin usage is based on attributes applied to controller actions, filters which act on these attributes and a bit of setup to boot up the plugin so you need to do the 3 following steps in the order you wish:
